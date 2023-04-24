@@ -20,6 +20,10 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.first_name }}</td>
                     <td>{{ user.second_name }}</td>
+                    <td>
+                        <a href="{{ url_for('views.edit_user', user_id=user.id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url_for('views.delete_user', user_id=user.id) }}" class="btn btn-danger">Delete</a>
+                      </td>
                 </tr>
             {% endfor %}
         </tbody>

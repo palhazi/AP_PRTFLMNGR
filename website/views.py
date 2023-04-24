@@ -42,4 +42,25 @@ def all_users():
     users = User.query.all()
     return render_template("all_users.html", users=users, user=current_user)
 
+@views.route('/edit-user/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def edit_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if request.method == 'POST':
+        user.email = request.form.get('email')
+        user.first_name = request.form.get('firstName')
+        user.second_name = request.form.get('secondName')
+        db.session.commit()
+        flash('User updated!', category='success')
+        return redirect(url_for('views.all_users'))
 
+    return render_template("edit_user.html", user=user)
+
+@views.route('/delete-user/<int:user_id>', methods=['GET'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    flash('User deleted!', category='success')
+    return redirect(url_for('views.all_users'))

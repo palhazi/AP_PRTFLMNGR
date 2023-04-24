@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="POST">
+    <h3 align="center">Edit User</h3>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        value="{{ user.email }}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        value="{{ user.first_name }}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="secondName">Second Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="secondName"
+        name="secondName"
+        value="{{ user.second_name }}"
+      />
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+  </form>
+{% endblock %}
