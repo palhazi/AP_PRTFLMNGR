@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Create Investment</h2>
+    <div class="container">
+
+        <form action="{{ url_for('views.create_investment') }}" method="post">
+            <label for="assetName">Asset Name</label>
+            <input type="text" name="assetName" id="assetName" required>
+            <label for="assetType">Asset Type</label>
+            <input type="text" name="assetType" id="assetType" required>
+            <label for="purchaseDate">Purchase Date</label>
+            <input type="date" name="purchaseDate" id="purchaseDate" required>
+            <label for="purchasePrice">Purchase Price</label>
+            <input type="number" step="any" name="purchasePrice" id="purchasePrice" required>
+            <label for="quantity">Quantity</label>
+            <input type="number" step="any" name="quantity" id="quantity" required>
+            <label for="currentPrice">Current Price</label>
+            <input type="number" step="any" name="currentPrice" id="currentPrice" required>
+            <label for="expectedInterestAmount">Expected Interest Amount</label>
+            <input type="number" step="any" name="expectedInterestAmount" id="expectedInterestAmount" required>
+            <label for="interestPaymentDate">Interest Payment Date</label>
+            <input type="date" name="interestPaymentDate" id="interestPaymentDate" required>
+            <label for="maturityDate">Maturity Date</label>
+            <input type="date" name="maturityDate" id="maturityDate" required>
+            <button type="submit">Create Investment</button>
+        </form>
+        <h2>Existing Investments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Asset Name</th>
+                    <th>Asset Type</th>
+                    <th>Purchase Date</th>
+                    <th>Purchase Price</th>
+                    <th>Quantity</th>
+                    <th>Current Price</th>
+                    <th>Expected Interest Amount</th>
+                    <th>Interest Payment Date</th>
+                    <th>Maturity Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for investment in user_investments %}
+                    <tr>
+                        <td>{{ investment.asset_name }}</td>
+                        <td>{{ investment.asset_type }}</td>
+                        <td>{{ investment.purchase_date }}</td>
+                        <td>{{ investment.purchase_price }}</td>
+                        <td>{{ investment.quantity }}</td>
+                        <td>{{ investment.current_price }}</td>
+                        <td>{{ investment.expected_interest_amount }}</td>
+                        <td>{{ investment.interest_payment_date }}</td>
+                        <td>{{ investment.maturity_date }}</td>
+                        <td>
+                            <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}">Edit</a>
+                            <a href="{{ url_for('views.delete_investment', investment_id=investment.id) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

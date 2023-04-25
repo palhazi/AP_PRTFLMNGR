@@ -17,3 +17,20 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     second_name = db.Column(db.String(150))
     notes = db.relationship('Note')
+
+class Investment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    asset_name = db.Column(db.String(150))
+    asset_type = db.Column(db.String(150))
+    purchase_date = db.Column(db.DateTime(timezone=True))
+    purchase_price = db.Column(db.Float)
+    quantity = db.Column(db.Float)
+    current_price = db.Column(db.Float)
+    expected_interest_amount = db.Column(db.Float)
+    interest_payment_date = db.Column(db.DateTime(timezone=True))
+    maturity_date = db.Column(db.DateTime(timezone=True))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    user = db.relationship('User', back_populates='investments')
+
+User.investments = db.relationship('Investment', back_populates='user')
