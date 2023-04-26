@@ -14,7 +14,6 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
@@ -31,8 +30,8 @@
         <div class="navbar-nav">
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="allUsers" href="{{ url_for('views.all_users') }}">All Users</a>
-          <a class="nav-item nav-link" id="createInvestment" href="{{ url_for('views.create_investment') }}">Create Investment</a>
+          <a class="nav-item nav-link" id="allUsers" href="{{ url_for('views.all_users') }}">Users</a>
+          <a class="nav-item nav-link" id="createInvestment" href="{{ url_for('views.create_investment') }}">Investment</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
