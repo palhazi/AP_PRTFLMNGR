@@ -51,7 +51,7 @@
             <tbody>
                 {% for investment in user_investments %}
                     <tr>
-                        <td>{{ investment.user.first_name }} {{ investment.user.second_name }}</td>tttáSziasztok!SSS
+                        <td>{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
                         <td>{{ investment.asset_name }}</td>
                         <td>{{ investment.asset_type }}</td>
                         <td>{{ investment.purchase_date }}</td>
@@ -62,8 +62,8 @@
                         <td>{{ investment.interest_payment_date }}</td>
                         <td>{{ investment.maturity_date }}</td>
                         <td>
-                            <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}">Edit</a>
-                            <a href="{{ url_for('views.delete_investment', investment_id=investment.id) }}">Delete</a>
+                            <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url_for('views.delete_investment', investment_id=investment.id) }}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -71,3 +71,4 @@
         </table>
     </div>
 {% endblock %}
+
