@@ -1,6 +1,22 @@
 
 {% extends "base.html" %}
 {% block content %}
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 1350px;
+        margin: 0 auto;
+    }
+    label {
+        margin-top: 10px;
+    }
+    button {
+        margin-top: 20px;
+        width: 100px;
+        align-self: center;
+    }
+</style>
 <div class="container">
     <h2>Investment</h2>
     <div class="container">
@@ -30,7 +46,7 @@
                 <option value="{{ user.id }}">{{ user.first_name }} {{ user.second_name }}</option>
                 {% endfor %}
             </select>
-            <button type="submit">Create Investment</button>
+            <button type="submit" class="btn btn-primary">Add</button>
         </form>
         <h2>Existing Investments</h2>
         <table>
