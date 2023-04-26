@@ -70,9 +70,12 @@ def delete_user(user_id):
 @views.route('/create-investment', methods=['GET', 'POST'])
 @login_required
 def create_investment():
+    users = User.query.all()
     user_investments = Investment.query.all()
     if request.method == 'POST':
         
+        user_id = request.form.get('user')
+
         asset_name = request.form.get('assetName')
         asset_type = request.form.get('assetType')
         purchase_date = request.form.get('purchaseDate')
@@ -86,13 +89,13 @@ def create_investment():
         maturity_date = request.form.get('maturityDate')
         maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
 
-        new_investment = Investment(asset_name=asset_name, asset_type=asset_type, purchase_date=purchase_date, purchase_price=purchase_price, quantity=quantity, current_price=current_price, expected_interest_amount=expected_interest_amount, interest_payment_date=interest_payment_date, maturity_date=maturity_date, user_id=current_user.id)
+        new_investment = Investment(asset_name=asset_name, asset_type=asset_type, purchase_date=purchase_date, purchase_price=purchase_price, quantity=quantity, current_price=current_price, expected_interest_amount=expected_interest_amount, interest_payment_date=interest_payment_date, maturity_date=maturity_date, user_id=user_id)
         db.session.add(new_investment)
         db.session.commit()
         flash('Investment created!', category='success')
         return redirect(url_for('views.create_investment'))
     
-    return render_template("create_investment.html", user_investments=user_investments, user=current_user)
+    return render_template("create_investment.html", user_investments=user_investments, user=current_user, users=users)
 
 # Befektetések módosítása
 @views.route('/edit-investment/<int:investment_id>', methods=['GET', 'POST'])

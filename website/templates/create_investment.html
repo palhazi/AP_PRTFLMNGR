@@ -24,12 +24,18 @@
             <input type="date" name="interestPaymentDate" id="interestPaymentDate" required>
             <label for="maturityDate">Maturity Date</label>
             <input type="date" name="maturityDate" id="maturityDate" required>
+            <label for="user">User</label>
+            <select name="user" id="user" required>
+                {% for user in users %}
+                <option value="{{ user.id }}">{{ user.first_name }} {{ user.second_name }}</option>
+                {% endfor %}
+            </select>
             <button type="submit">Create Investment</button>
         </form>
         <h2>Existing Investments</h2>
         <table>
             <thead>
-                <tr>
+                <tr><th>User</th>
                     <th>Asset Name</th>
                     <th>Asset Type</th>
                     <th>Purchase Date</th>
@@ -45,6 +51,7 @@
             <tbody>
                 {% for investment in user_investments %}
                     <tr>
+                        <td>{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
                         <td>{{ investment.asset_name }}</td>
                         <td>{{ investment.asset_type }}</td>
                         <td>{{ investment.purchase_date }}</td>
