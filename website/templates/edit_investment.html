@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 1350px;
+        margin: 0 auto;
+    }
+    label {
+        margin-top: 10px;
+    }
+    button {
+        margin-top: 20px;
+        width: 100px;
+        align-self: center;
+    }
+</style>
     <div class="container">
         <h2>Edit Investment</h2>
         <form action="{{ url_for('views.edit_investment', investment_id=investment.id) }}" method="post">
@@ -27,7 +43,7 @@
                     <option value="{{ user.id }}" {% if user.id == investment.user_id %}selected{% endif %}>{{ user.first_name }} {{ user.second_name }}</option> <!-- Hozzáadva -->
                 {% endfor %} <!-- Hozzáadva -->
             </select> <!-- Hozzáadva -->            
-            <button type="submit">Update Investment</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 {% endblock %}
