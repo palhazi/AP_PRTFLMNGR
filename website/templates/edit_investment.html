@@ -22,6 +22,11 @@
             <input type="date" name="interestPaymentDate" id="interestPaymentDate" value="{{ investment.interest_payment_date.date() }}" required>
             <label for="maturityDate">Maturity Date</label>
             <input type="date" name="maturityDate" id="maturityDate" value="{{ investment.maturity_date.date() }}" required>
+            <select name="user" id="user" required> <!-- Hozzáadva -->
+                {% for user in users %} <!-- Hozzáadva -->
+                    <option value="{{ user.id }}" {% if user.id == investment.user_id %}selected{% endif %}>{{ user.first_name }} {{ user.second_name }}</option> <!-- Hozzáadva -->
+                {% endfor %} <!-- Hozzáadva -->
+            </select> <!-- Hozzáadva -->            
             <button type="submit">Update Investment</button>
         </form>
     </div>

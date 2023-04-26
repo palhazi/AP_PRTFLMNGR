@@ -102,6 +102,7 @@ def create_investment():
 @login_required
 def edit_investment(investment_id):
     investment = Investment.query.get_or_404(investment_id)
+    users = User.query.all()  # Hozzáadva
     if request.method == 'POST':
     
         investment.asset_name = request.form.get('assetName')
@@ -122,13 +123,16 @@ def edit_investment(investment_id):
         
         maturity_date = request.form.get('maturityDate')  
         maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
-        investment.maturity_date = maturity_date  
+        investment.maturity_date = maturity_date
+
+        user_id = request.form.get('user')  # Hozzáadva
+        investment.user_id = user_id  # Hozzáadva 
 
         db.session.commit()
         flash('Investment updated!', category='success')
         return redirect(url_for('views.create_investment'))
 
-    return render_template('edit_investment.html', investment=investment, user=current_user)
+    return render_template('edit_investment.html', investment=investment, user=current_user, users=users)  # Módosítva
 
 
 
