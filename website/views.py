@@ -5,29 +5,32 @@ from . import db
 import json
 from datetime import datetime
 
+# Létrehozzuk a views Blueprint-et.
 views = Blueprint('views', __name__)
 
 
+# Definiáljuk a főoldal útvonalát.
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
     if request.method == 'POST': 
-        note = request.form.get('note')#Gets the note from the HTML 
+        note = request.form.get('note') 
 
         if len(note) < 1:
             flash('Note is too short!', category='error') 
         else:
-            new_note = Note(data=note, user_id=current_user.id)  #providing the schema for the note 
-            db.session.add(new_note) #adding the note to the database 
+            new_note = Note(data=note, user_id=current_user.id)  
+            db.session.add(new_note)  
             db.session.commit()
             flash('Note added!', category='success')
 
     return render_template("home.html", user=current_user)
 
 
+# Definiáljuk a feljegyzés törlésének útvonalát.
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
-    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    note = json.loads(request.data)
     noteId = note['noteId']
     note = Note.query.get(noteId)
     if note:
@@ -37,12 +40,16 @@ def delete_note():
 
     return jsonify({})
 
+
+# Definiáljuk az összes felhasználót megjelenítő útvonalat.
 @views.route('/all-users', methods=['GET'])
 @login_required
 def all_users():
     users = User.query.all()
     return render_template("all_users.html", users=users, user=current_user)
 
+
+# Definiáljuk a felhasználó szerkesztésének útvonalát.
 @views.route('/edit-user/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def edit_user(user_id):
@@ -57,6 +64,8 @@ def edit_user(user_id):
 
     return render_template("edit_user.html", user=user)
 
+
+# Definiáljuk a felhasználó törlésének útvonalát.
 @views.route('/delete-user/<int:user_id>', methods=['GET'])
 @login_required
 def delete_user(user_id):
@@ -66,7 +75,8 @@ def delete_user(user_id):
     flash('User deleted!', category='success')
     return redirect(url_for('views.all_users'))
 
-# Befektetések létrehozása
+
+# Definiáljuk a befektetés létrehozásának útvonalát.
 @views.route('/create-investment', methods=['GET', 'POST'])
 @login_required
 def create_investment():
@@ -97,12 +107,14 @@ def create_investment():
     
     return render_template("create_investment.html", user_investments=user_investments, user=current_user, users=users)
 
-# Befektetések módosítása
+
+
+# Definiáljuk a befektetés szerkesztésémek útvonalát.
 @views.route('/edit-investment/<int:investment_id>', methods=['GET', 'POST'])
 @login_required
 def edit_investment(investment_id):
     investment = Investment.query.get_or_404(investment_id)
-    users = User.query.all()  # Hozzáadva
+    users = User.query.all()  
     if request.method == 'POST':
     
         investment.asset_name = request.form.get('assetName')
@@ -125,8 +137,8 @@ def edit_investment(investment_id):
         maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
         investment.maturity_date = maturity_date
 
-        user_id = request.form.get('user')  # Hozzáadva
-        investment.user_id = user_id  # Hozzáadva 
+        user_id = request.form.get('user') 
+        investment.user_id = user_id  
 
         db.session.commit()
         flash('Investment updated!', category='success')
@@ -136,7 +148,7 @@ def edit_investment(investment_id):
 
 
 
-# Befektetések törlése
+# Definiáljuk a befektetés törlésének útvonalát.
 @views.route('/delete-investment/<int:investment_id>', methods=['GET'])
 @login_required
 def delete_investment(investment_id):

@@ -1,21 +1,22 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import db   ##means from __init__.py import db
+from . import db   # Az __init__.py modulból importáljuk a db változót.
 from flask_login import login_user, login_required, logout_user, current_user
 
-
+# Létrehozzuk az 'auth' Blueprint-ot.
 auth = Blueprint('auth', __name__)
 
-
+# Definiáljuk a bejelentkezési útvonalat és a hozzá tartozó függvényt.
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-
+        # Ellenőrizzük, hogy létezik-e már ilyen email című felhasználó.
         user = User.query.filter_by(email=email).first()
         if user:
+            # Ha a jelszó helyes, akkor bejelentkeztetjük a felhasználót.
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
@@ -27,14 +28,14 @@ def login():
 
     return render_template("login.html", user=current_user)
 
-
+# Definiáljuk a kijelentkezési útvonalat és a hozzá tartozó függvényt.
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-
+# Definiáljuk a regisztrációs útvonalat és a hozzá tartozó függvényt.
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
@@ -44,6 +45,7 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
+        # Ellenőrizzük, hogy létezik-e már ilyen email című felhasználó.
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
@@ -58,6 +60,7 @@ def sign_up():
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
+            # Ha minden rendben, létrehozzuk az új felhasználót és hozzáadjuk az adatbázishoz.
             new_user = User(email=email, first_name=first_name, second_name=second_name, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
