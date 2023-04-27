@@ -49,7 +49,6 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        # Ellenőrizzük, hogy létezik-e már ilyen email című felhasználó.
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
@@ -64,16 +63,15 @@ def sign_up():
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
-            # Ha minden rendben, létrehozzuk az új felhasználót és hozzáadjuk az adatbázishoz.
             new_user = User(email=email, first_name=first_name, second_name=second_name, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
-            login_user(new_user, remember=True)
-            flash('Account created!', category='success')
-            return redirect(url_for('views.home'))
+            flash('Account created! Please wait for admin approval before logging in.', category='success')
+            return redirect(url_for('auth.login'))
 
     return render_template("sign_up.html", user=current_user)
+
 
 # Regsiztráció jóváhagyása
 @auth.route('/approve_user/<int:user_id>', methods=['POST'])
