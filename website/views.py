@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Note, User, Investment
+from .models import Note, User, Investment, InvestmentSnapshot
 from . import db
 import json
 from datetime import datetime
@@ -165,3 +165,38 @@ def delete_investment(investment_id):
 def admin_dashboard():
     users = User.query.filter_by(is_approved=False).all()
     return render_template("admin_dashboard.html", user=current_user, users=users)
+
+# Definiáljuk a snapshot útvonalát.
+@views.route('/create_snapshots', methods=['POST'])
+def create_snapshots():
+    investments = Investment.query.all()
+
+    if investments:
+        current_time = datetime.utcnow()
+
+        # Új sorszám létrehozása
+        max_snapshot_group_id = db.session.query(db.func.max(InvestmentSnapshot.snapshot_group_id)).scalar()
+        if max_snapshot_group_id is None:
+            new_snapshot_group_id = 1
+        else:
+            new_snapshot_group_id = max_snapshot_group_id + 1
+
+        for investment in investments:
+            snapshot = InvestmentSnapshot(
+                investment_id=investment.id,
+                snapshot_date=current_time,
+                purchase_price=investment.purchase_price,
+                quantity=investment.quantity,
+                current_price=investment.current_price,
+                expected_interest_amount=investment.expected_interest_amount,
+                interest_payment_date=investment.interest_payment_date,
+                maturity_date=investment.maturity_date,
+                snapshot_group_id=new_snapshot_group_id  # Folytonos sorszám hozzáadása
+            )
+            db.session.add(snapshot)
+        db.session.commit()
+        return jsonify({"message": "Snapshots created successfully"}), 200
+    else:
+        return jsonify({"message": "No investments found"}), 404
+
+

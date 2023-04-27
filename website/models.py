@@ -34,7 +34,24 @@ class Investment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     user = db.relationship('User', back_populates='investments')
+    snapshots = db.relationship('InvestmentSnapshot', back_populates='investment')
 
 
 # Hozzáadjuk az 'investments' attribútumot a User osztályhoz.
 User.investments = db.relationship('Investment', back_populates='user')
+
+
+# Definiáljuk az InvestmentSnapshot osztályt, amely a felhasználók befektetéseinek mentett pillanatképét tartalmazza
+class InvestmentSnapshot(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    investment_id = db.Column(db.Integer, db.ForeignKey('investment.id'))
+    snapshot_date = db.Column(db.DateTime(timezone=True), default=db.func.now())
+    purchase_price = db.Column(db.Float)
+    quantity = db.Column(db.Float)
+    current_price = db.Column(db.Float)
+    expected_interest_amount = db.Column(db.Float)
+    interest_payment_date = db.Column(db.DateTime(timezone=True))
+    maturity_date = db.Column(db.DateTime(timezone=True))
+    snapshot_group_id = db.Column(db.Integer)
+
+    investment = db.relationship('Investment', back_populates='snapshots')

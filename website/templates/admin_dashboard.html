@@ -2,6 +2,7 @@
 {% block content %}
 <div class="container">
     <h2>Admin Dashboard</h2>
+    
     <h3>Users awaiting approval:</h3>
     <table>
         <thead>
@@ -16,12 +17,16 @@
                     <td>{{ user.email }}</td>
                     <td>
                         <form action="{{ url_for('auth.approve_user', user_id=user.id) }}" method="post">
-                            <button type="submit">Approve</button>
+                            <button type="submit" class="btn btn-primary">Approve</button>
                         </form>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <h3>Investment snapshot:</h3>
+    <button onclick="createSnapshots()">Create Snapshots</button>
 </div>
 {% endblock %}
+
