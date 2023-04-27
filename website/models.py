@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     second_name = db.Column(db.String(150))
     notes = db.relationship('Note')
+    is_approved = db.Column(db.Boolean, default=False)
 
 # Definiáljuk az Investment osztályt, amely a felhasználók befektetéseit reprezentálja.
 class Investment(db.Model):

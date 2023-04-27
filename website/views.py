@@ -158,3 +158,10 @@ def delete_investment(investment_id):
         db.session.commit()
         flash('Investment deleted!', category='success')
     return redirect(url_for('views.create_investment'))
+
+# Definiáljuk az admin_dashboard útvonalát.
+@views.route('/admin_dashboard')
+@login_required
+def admin_dashboard():
+    users = User.query.filter_by(is_approved=False).all()
+    return render_template("admin_dashboard.html", user=current_user, users=users)

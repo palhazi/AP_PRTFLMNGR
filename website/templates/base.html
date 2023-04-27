@@ -32,6 +32,7 @@
           <a class="nav-item nav-link" id="home" href="/">Home</a>
           <a class="nav-item nav-link" id="allUsers" href="{{ url_for('views.all_users') }}">Users</a>
           <a class="nav-item nav-link" id="createInvestment" href="{{ url_for('views.create_investment') }}">Investment</a>
+          <a class="nav-item nav-link" id="adminDashboard" href="{{ url_for('views.admin_dashboard') }}">Admin</a> 
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>

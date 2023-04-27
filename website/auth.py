@@ -7,6 +7,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 # Létrehozzuk az 'auth' Blueprint-ot.
 auth = Blueprint('auth', __name__)
 
+
 # Definiáljuk a bejelentkezési útvonalat és a hozzá tartozó függvényt.
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -16,17 +17,20 @@ def login():
         # Ellenőrizzük, hogy létezik-e már ilyen email című felhasználó.
         user = User.query.filter_by(email=email).first()
         if user:
-            # Ha a jelszó helyes, akkor bejelentkeztetjük a felhasználót.
-            if check_password_hash(user.password, password):
+            # Ha a jelszó helyes és a felhasználó jóvá van hagyva, akkor bejelentkeztetjük a felhasználót.
+            if check_password_hash(user.password, password) and user.is_approved:
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
+            elif not user.is_approved:
+                flash('Your account is not approved yet. Please wait for approval.', category='error')
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
 
     return render_template("login.html", user=current_user)
+
 
 # Definiáljuk a kijelentkezési útvonalat és a hozzá tartozó függvényt.
 @auth.route('/logout')
@@ -70,3 +74,16 @@ def sign_up():
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
+
+# Regsiztráció jóváhagyása
+@auth.route('/approve_user/<int:user_id>', methods=['POST'])
+@login_required
+def approve_user(user_id):
+    user = User.query.get(user_id)
+
+    if user and not user.is_approved:
+        user.is_approved = True
+        db.session.commit()
+        flash(f'User {user.email} has been approved.', category='success')
+
+    return redirect(url_for('views.admin_dashboard'))
