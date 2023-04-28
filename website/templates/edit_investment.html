@@ -41,6 +41,7 @@
             <label for="maturityDate">Maturity Date</label>
             <input type="date" name="maturityDate" id="maturityDate" value="{{ investment.maturity_date.date() }}" required>
             <!-- User selection dropdown -->
+            <label for="user">User</label>
             <select name="user" id="user" required> 
                 {% for user in users %} 
                     <option value="{{ user.id }}" {% if user.id == investment.user_id %}selected{% endif %}>{{ user.first_name }} {{ user.second_name }}</option> 
