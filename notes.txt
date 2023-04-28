@@ -1,4 +1,6 @@
 Fájlstruktúra kiíratása terminálon:   
 ls -R
 
-
+A VS Code-ban a környezet kiválasztásához használhatod az "Command Palette"-t (Command+Shift+P),
+majd az "Python: Select Interpreter" parancsot kell kiválasztani. 
+Ezután a felugró listából kiválaszthatod az általad használni kívánt környezetet. 
