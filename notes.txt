@@ -1,3 +1,4 @@
-Fájlstruktúra kiíratása terminálon:   ls -R
+Fájlstruktúra kiíratása terminálon:   
+ls -R
 
 

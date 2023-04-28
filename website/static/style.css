@@ -1,0 +1,59 @@
+/* Általános stílusok */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Fejléc */
+header {
+    background-color: #35424a;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #e8491d 3px solid;
+}
+
+header h1 {
+    float: left;
+    font-size: 26px;
+    margin-top: 5px;
+}
+
+header nav {
+    float: right;
+    margin-top: 35px;
+}
+
+header a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0 5px 0 5px;
+}
+
+header a:hover {
+    color: #e8491d;
+    font-weight: bold;
+}
+
+/* Portfólió elemek */
+.portfolio-item {
+    background-color: #ffffff;
+    margin-bottom: 24px;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+}
+
+.portfolio-item h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
