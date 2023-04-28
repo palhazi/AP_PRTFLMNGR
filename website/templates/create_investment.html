@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% block content %}
 <style>
@@ -80,13 +79,13 @@
                         <td>{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
                         <td>{{ investment.asset_name }}</td>
                         <td>{{ investment.asset_type }}</td>
-                        <td>{{ investment.purchase_date }}</td>
+                        <td>{{ investment.purchase_date.strftime('%Y-%m-%d') }}</td>
                         <td>{{ investment.purchase_price }}</td>
                         <td>{{ investment.quantity }}</td>
                         <td>{{ investment.current_price }}</td>
                         <td>{{ investment.expected_interest_amount }}</td>
-                        <td>{{ investment.interest_payment_date }}</td>
-                        <td>{{ investment.maturity_date }}</td>
+                        <td>{{ investment.interest_payment_date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ investment.maturity_date.strftime('%Y-%m-%d') }}</td>
                         <!-- Edit and Delete buttons for each investment -->
                         <td>
                             <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}" class="btn btn-primary">Edit</a>
