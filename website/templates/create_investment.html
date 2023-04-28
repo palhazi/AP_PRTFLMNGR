@@ -2,15 +2,18 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
+    /* Styling for the form */
     form {
         display: flex;
         flex-direction: column;
         width: 1350px;
         margin: 0 auto;
     }
+    /* Styling for the labels */
     label {
         margin-top: 10px;
     }
+    /* Styling for the button */
     button {
         margin-top: 20px;
         width: 100px;
@@ -18,10 +21,13 @@
     }
 </style>
 <div class="container">
+    <!-- Investment title -->
     <h2>Investment</h2>
     <div class="container">
 
+        <!-- Add investment form -->
         <form action="{{ url_for('views.create_investment') }}" method="post">
+            <!-- Input fields for investment details -->
             <label for="assetName">Asset Name</label>
             <input type="text" name="assetName" id="assetName" required>
             <label for="assetType">Asset Type</label>
@@ -40,14 +46,17 @@
             <input type="date" name="interestPaymentDate" id="interestPaymentDate" required>
             <label for="maturityDate">Maturity Date</label>
             <input type="date" name="maturityDate" id="maturityDate" required>
+            <!-- Input fields for investment details -->
             <label for="user">User</label>
             <select name="user" id="user" required>
                 {% for user in users %}
                 <option value="{{ user.id }}">{{ user.first_name }} {{ user.second_name }}</option>
                 {% endfor %}
             </select>
+            <!-- Add button -->
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
+        <!-- Existing investments table -->
         <h2>Existing Investments</h2>
         <table>
             <thead>
@@ -65,6 +74,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Iterate through all investments and display their details in the table -->
                 {% for investment in user_investments %}
                     <tr>
                         <td>{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
@@ -77,6 +87,7 @@
                         <td>{{ investment.expected_interest_amount }}</td>
                         <td>{{ investment.interest_payment_date }}</td>
                         <td>{{ investment.maturity_date }}</td>
+                        <!-- Edit and Delete buttons for each investment -->
                         <td>
                             <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}" class="btn btn-primary">Edit</a>
                             <a href="{{ url_for('views.delete_investment', investment_id=investment.id) }}" class="btn btn-danger">Delete</a>

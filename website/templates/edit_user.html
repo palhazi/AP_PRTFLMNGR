@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <!-- User edit form -->
   <form method="POST">
     <h3 align="center">Edit User</h3>
+    <!-- Email input field -->
     <div class="form-group">
       <label for="email">Email Address</label>
       <input
@@ -13,6 +15,7 @@
         value="{{ user.email }}"
       />
     </div>
+    <!-- First name input field -->
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input
@@ -23,6 +26,7 @@
         value="{{ user.first_name }}"
       />
     </div>
+    <!-- Second name input field -->
     <div class="form-group">
       <label for="secondName">Second Name</label>
       <input
@@ -33,6 +37,7 @@
         value="{{ user.second_name }}"
       />
     </div>
+    <!-- Save changes button -->
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>

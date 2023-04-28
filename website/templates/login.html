@@ -1,7 +1,11 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
 %}
+<!-- Login form -->
 <form method="POST">
+  <!-- Login title -->
   <h3 align="center">Login</h3>
+
+  <!-- Email input field -->
   <div class="form-group">
     <label for="email">Email Address</label>
     <input
@@ -12,6 +16,8 @@
       placeholder="Enter email"
     />
   </div>
+
+  <!-- Password input field -->
   <div class="form-group">
     <label for="password">Password</label>
     <input
@@ -22,6 +28,8 @@
       placeholder="Enter password"
     />
   </div>
+
+  <!-- Submit button -->
   <br />
   <button type="submit" class="btn btn-primary">Login</button>
 </form>

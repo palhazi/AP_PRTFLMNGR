@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
+    <!-- Admin Dashboard title -->
     <h2>Admin Dashboard</h2>
     
+    <!-- Users awaiting approval section -->
     <h3>Users awaiting approval:</h3>
     <table>
         <thead>
@@ -12,6 +14,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Iterate through the users and display their emails and approval buttons -->
             {% for user in users %}
                 <tr>
                     <td>{{ user.email }}</td>
@@ -25,6 +28,7 @@
         </tbody>
     </table>
 
+    <!-- Investment snapshot section -->
     <h3>Investment snapshot:</h3>
     <button onclick="createSnapshots()">Create Snapshots</button>
 </div>

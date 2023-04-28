@@ -17,8 +17,10 @@
         align-self: center;
     }
 </style>
+    <!-- Container div -->
     <div class="container">
         <h2>Edit Investment</h2>
+        <!-- Edit investment form -->
         <form action="{{ url_for('views.edit_investment', investment_id=investment.id) }}" method="post">
             <label for="assetName">Asset Name</label>
             <input type="text" name="assetName" id="assetName" value="{{ investment.asset_name }}" required>
@@ -38,11 +40,13 @@
             <input type="date" name="interestPaymentDate" id="interestPaymentDate" value="{{ investment.interest_payment_date.date() }}" required>
             <label for="maturityDate">Maturity Date</label>
             <input type="date" name="maturityDate" id="maturityDate" value="{{ investment.maturity_date.date() }}" required>
-            <select name="user" id="user" required> <!-- Hozzáadva -->
-                {% for user in users %} <!-- Hozzáadva -->
-                    <option value="{{ user.id }}" {% if user.id == investment.user_id %}selected{% endif %}>{{ user.first_name }} {{ user.second_name }}</option> <!-- Hozzáadva -->
-                {% endfor %} <!-- Hozzáadva -->
-            </select> <!-- Hozzáadva -->            
+            <!-- User selection dropdown -->
+            <select name="user" id="user" required> 
+                {% for user in users %} 
+                    <option value="{{ user.id }}" {% if user.id == investment.user_id %}selected{% endif %}>{{ user.first_name }} {{ user.second_name }}</option> 
+                {% endfor %} 
+            </select> 
+             <!-- Update button -->           
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
