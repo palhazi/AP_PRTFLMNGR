@@ -220,11 +220,28 @@ def create_snapshots():
     else:
         return jsonify({"message": "No investments found"}), 404
 
-# Definiáljuk a password útvonalát.
-@views.route('/password_protected', methods=['GET', 'POST'])
-@check_password('your_password_here')  # Replace 'your_password_here' with the desired password
-def password_protected():
-    if request.method == 'POST':
-        return redirect(url_for('admin_dashboard'))
-    return render_template('password_protected.html')
+# Definiáljuk a kalkulátor útvonalát és működését.
+from flask import request
 
+@views.route('/calculator', methods=['GET', 'POST'])
+@login_required
+def calculator():
+    result = None
+    if request.method == 'POST':
+        num1 = float(request.form.get('num1', 0))
+        num2 = float(request.form.get('num2', 0))
+        operation = request.form.get('operation')
+
+        if operation == 'add':
+            result = num1 + num2
+        elif operation == 'subtract':
+            result = num1 - num2
+        elif operation == 'multiply':
+            result = num1 * num2
+        elif operation == 'divide':
+            if num2 != 0:
+                result = num1 / num2
+            else:
+                result = "A nullával való osztás nem megengedett!"
+
+    return render_template("calculator.html", user=current_user, result=result)

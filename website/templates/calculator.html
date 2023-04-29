@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Calculator</h1>
+  <form action="{{ url_for('views.calculator') }}" method="post">
+    <input type="number" name="num1" placeholder="Első szám">
+    <input type="number" name="num2" placeholder="Második szám">
+    <select name="operation">
+      <option value="add">Összeadás</option>
+      <option value="subtract">Kivonás</option>
+      <option value="multiply">Szorzás</option>
+      <option value="divide">Osztás</option>
+    </select>
+    <button type="submit">Számol</button>
+  </form>
+  {% if result %}
+    <h2>Eredmény: {{ result }}</h2>
+  {% endif %}
+{% endblock %}
