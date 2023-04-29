@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, abort
 from flask_login import login_required, current_user
 from .models import Note, User, Investment, InvestmentSnapshot
 from . import db
 import json
 from datetime import datetime
+from functools import wraps
 
 # Létrehozzuk a views Blueprint-et.
 views = Blueprint('views', __name__)
@@ -159,12 +160,32 @@ def delete_investment(investment_id):
         flash('Investment deleted!', category='success')
     return redirect(url_for('views.create_investment'))
 
+# Definiáljuk a jelszó ellenőrző függvényt
+def check_password(password):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            error = None
+            if request.method == 'POST':
+                provided_password = request.form.get('password')
+                if provided_password == password:
+                    return f(*args, **kwargs)
+                error = "Incorrect password. Please try again."
+            return render_template('password_protected.html', user=current_user, error=error)
+        return decorated_function
+    return decorator
+
+
 # Definiáljuk az admin_dashboard útvonalát.
-@views.route('/admin_dashboard')
+@views.route('/admin_dashboard', methods=['GET', 'POST'])
 @login_required
+@check_password('123456')  # Replace 'your_password_here' with the desired password
 def admin_dashboard():
+    if request.method == 'POST':
+        users = User.query.filter_by(is_approved=False).all()
+        return render_template("admin_dashboard.html", user=current_user, users=users)
     users = User.query.filter_by(is_approved=False).all()
-    return render_template("admin_dashboard.html", user=current_user, users=users)
+    return render_template("password_protected.html", user=current_user, users=users)
 
 # Definiáljuk a snapshot útvonalát.
 @views.route('/create_snapshots', methods=['POST'])
@@ -199,4 +220,11 @@ def create_snapshots():
     else:
         return jsonify({"message": "No investments found"}), 404
 
+# Definiáljuk a password útvonalát.
+@views.route('/password_protected', methods=['GET', 'POST'])
+@check_password('your_password_here')  # Replace 'your_password_here' with the desired password
+def password_protected():
+    if request.method == 'POST':
+        return redirect(url_for('admin_dashboard'))
+    return render_template('password_protected.html')
 
