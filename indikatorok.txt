@@ -1,0 +1,17 @@
+Mozgóátlagok (Moving Averages, MA): A mozgóátlagok a piaci árak átlagát számítják ki
+egy adott időszakon belül, és segítenek a rövid távú zaj kiszűrésében, 
+hogy jobban lássuk az alapvető trendeket.
+
+Relatív erő index (Relative Strength Index, RSI): 
+Az RSI egy oszcillátor, amely 0 és 100 között mozog. 
+Az RSI segítségével a befektetők meghatározhatják, hogy egy adott eszköz túlvásárolt vagy túladott-e.
+
+Bollinger sávok (Bollinger Bands): A Bollinger sávok egy olyan indikátor, 
+amely a mozgóátlagokat és a szórásokat használja az árfolyam volatilitásának mérésére. 
+A sávok kiszélesednek, amikor a volatilitás növekszik, és összeszűkülnek, amikor a volatilitás csökken.
+
+MACD (Moving Average Convergence Divergence): A MACD egy olyan indikátor, amely az átlagok konvergenciáját 
+és divergenciáját figyeli, hogy az előző trendek erősségét értékelje, és esetleges fordulópontokat azonosítson.
+
+Stochastics: A stochastics egy oszcillátor, amely a záróár helyzetét hasonlítja össze az adott időszak ársávjával. 
+A stochastic segíthet megtalálni a túlvásárolt és túladott zónákat, valamint a lehetséges fordulópontokat.

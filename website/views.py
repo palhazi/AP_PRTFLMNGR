@@ -5,6 +5,7 @@ from . import db
 import json
 from datetime import datetime
 from functools import wraps
+import yfinance as yf
 
 # Létrehozzuk a views Blueprint-et.
 views = Blueprint('views', __name__)
@@ -245,3 +246,18 @@ def calculator():
                 result = "A nullával való osztás nem megengedett!"
 
     return render_template("calculator.html", user=current_user, result=result)
+
+# Definiáljuk az útvonalat a részvényárak lekérdezéséhez és megjelenítéséhez.
+
+@views.route('/stock', methods=['GET', 'POST'])
+def stock():
+    if request.method == 'POST':
+        ticker = request.form['ticker']
+        start_date = request.form['start_date']
+        end_date = request.form['end_date']
+
+        data = yf.download(ticker, start=start_date, end=end_date)
+        return render_template('stock_data.html', data=data.to_html(), user=current_user)
+
+    return render_template('stock_form.html', user=current_user)
+

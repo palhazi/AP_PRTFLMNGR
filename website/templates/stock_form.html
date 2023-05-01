@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Stock Data</h1>
+    <form action="/stock" method="POST">
+        <label for="ticker">Ticker:</label>
+        <input type="text" id="ticker" name="ticker" required><br><br>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

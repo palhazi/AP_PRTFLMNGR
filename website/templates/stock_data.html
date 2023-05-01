@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Stock Data</h1>
+    <table>
+        {{ data|safe }}
+    </table>
+    <a href="/stock">Back</a>
+{% endblock %}
