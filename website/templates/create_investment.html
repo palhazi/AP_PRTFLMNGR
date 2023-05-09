@@ -18,6 +18,55 @@
         width: 100px;
         align-self: center;
     }
+        /* Add individual column width styles */
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    th {
+        text-align: center;
+        white-space: normal;
+        word-wrap: break-word;
+    } 
+    .user-col {
+        width: 150px;
+    }
+    .asset-name-col {
+        width: 150px;
+    }
+    .asset-type-col {
+        width: 150px;
+    }
+    .purchase-date-col {
+        width: 150px;
+    }
+    .purchase-price-col {
+        width: 150px;
+    }
+    .quantity-col {
+        width: 150px;
+    }
+    .current-price-col {
+        width: 150px;
+    }
+    .expected-interest-col {
+        width: 180px;
+    }
+    .interest-payment-date-col {
+        width: 150px;
+    }
+    .maturity-date-col {
+        width: 150px;
+    }
+    .actions-col {
+        width: 180px;
+    }
 </style>
 <div class="container">
     <!-- Investment title -->
@@ -59,35 +108,36 @@
         <h2>Existing Investments</h2>
         <table>
             <thead>
-                <tr><th>User</th>
-                    <th>Asset Name</th>
-                    <th>Asset Type</th>
-                    <th>Purchase Date</th>
-                    <th>Purchase Price</th>
-                    <th>Quantity</th>
-                    <th>Current Price</th>
-                    <th>Expected Interest Amount</th>
-                    <th>Interest Payment Date</th>
-                    <th>Maturity Date</th>
-                    <th>Actions</th>
+                <tr>
+                    <th class="user-col">User</th>
+                    <th class="asset-name-col">Asset Name</th>
+                    <th class="asset-type-col">Asset Type</th>
+                    <th class="purchase-date-col">Purchase Date</th>
+                    <th class="purchase-price-col">Purchase Price</th>
+                    <th class="quantity-col">Quantity</th>
+                    <th class="current-price-col">Current Price</th>
+                    <th class="expected-interest-col">Expected Interest Amount</th>
+                    <th class="interest-payment-date-col">Interest Payment Date</th>
+                    <th class="maturity-date-col">Maturity Date</th>
+                    <th class="actions-col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Iterate through all investments and display their details in the table -->
                 {% for investment in user_investments %}
                     <tr>
-                        <td>{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
-                        <td>{{ investment.asset_name }}</td>
-                        <td>{{ investment.asset_type }}</td>
-                        <td>{{ investment.purchase_date.strftime('%Y-%m-%d') }}</td>
-                        <td>{{ investment.purchase_price }}</td>
-                        <td>{{ investment.quantity }}</td>
-                        <td>{{ investment.current_price }}</td>
-                        <td>{{ investment.expected_interest_amount }}</td>
-                        <td>{{ investment.interest_payment_date.strftime('%Y-%m-%d') }}</td>
-                        <td>{{ investment.maturity_date.strftime('%Y-%m-%d') }}</td>
+                        <td class="user-col">{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
+                        <td class="asset-name-col">{{ investment.asset_name }}</td>
+                        <td class="asset-type-col">{{ investment.asset_type }}</td>
+                        <td class="purchase-date-col">{{ investment.purchase_date.strftime('%Y-%m-%d') }}</td>
+                        <td class="purchase-price-col">{{ investment.purchase_price }}</td>
+                        <td class="quantity-col">{{ investment.quantity }}</td>
+                        <td class="current-price-col">{{ investment.current_price }}</td>
+                        <td class="expected-interest-col">{{ investment.expected_interest_amount }}</td>
+                        <td class="interest-payment-date-col">{{ investment.interest_payment_date.strftime('%Y-%m-%d') }}</td>
+                        <td class="maturity-date-col">{{ investment.maturity_date.strftime('%Y-%m-%d') }}</td>
                         <!-- Edit and Delete buttons for each investment -->
-                        <td>
+                        <td class="action-col">
                             <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}" class="btn btn-primary">Edit</a>
                             <a href="{{ url_for('views.delete_investment', investment_id=investment.id) }}" class="btn btn-danger">Delete</a>
                         </td>
