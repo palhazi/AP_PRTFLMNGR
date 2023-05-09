@@ -7,11 +7,9 @@ Ezután a felugró listából kiválaszthatod az általad használni kívánt k�
 
 command+shift+p --- VsCode kiválasztó
 
+sql-lite parancsok futtatása, mindig az oldalon lévő  Select(Shift+enter) kell nyomni, akkor jelenik meg az eredmény
 
-a portfólió kockázatának jelentős csökkentése érdekében legalább 1
-5-20 különböző részvényt érdemes elhelyezni a portfólióban. Fontos azonban, h
-ogy ezek az értékpapírok különböző szektorokból 
-és földrajzi régiókból származzanak, hogy csökkentsék a vállalatspecifikus és piaci kockázatot.
+
 
 
 
