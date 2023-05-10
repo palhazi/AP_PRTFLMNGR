@@ -9,7 +9,9 @@ command+shift+p --- VsCode kiválasztó
 
 sql-lite parancsok futtatása, mindig az oldalon lévő  Select(Shift+enter) kell nyomni, akkor jelenik meg az eredmény
 
-7777778
+Feladatok:
+
+Asset menü létrehozása - investmentből redundanciák kivétele
 
 
 
