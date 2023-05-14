@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    /* Styling for the form */
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 1350px;
+        margin: 0 auto;
+    }
+    /* Styling for the labels */
+    label {
+        margin-top: 10px;
+    }
+    /* Styling for the button */
+    button {
+        margin-top: 20px;
+        width: 100px;
+        align-self: center;
+    }
+    /* Add individual column width styles */
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    th {
+        text-align: center;
+        white-space: normal;
+        word-wrap: break-word;
+    } 
+    .name-col {
+        width: 150px;
+    }
+    .longname-col {
+        width: 150px;
+    }
+    .type-col {
+        width: 150px;
+    }
+    .interest-payment-date-col {
+        width: 150px;
+    }
+    .maturity-date-col {
+        width: 150px;
+    }
+    .description-col {
+        width: 150px;
+    }
+    .location-col {
+        width: 150px;
+    }
+    .link-col {
+        width: 150px;
+    }
+    .costs-col {
+        width: 150px;
+    }
+    .actions-col {
+        width: 180px;
+    }
+</style>
+<div class="container">
+    <!-- Asset title -->
+    <h2>Asset</h2>
+    <div class="container">
+
+        <!-- Add asset form -->
+        <form action="{{ url_for('views.create_asset') }}" method="post">
+            <!-- Input fields for asset details -->
+            <!-- required -- kötelező megadni -->
+            <label for="name">Asset Name</label>
+            <input type="text" name="name" id="name" required>
+            <label for="long_name">Long Name</label>
+            <input type="text" name="long_name" id="long_name" required>
+            <label for="type">Asset Type</label>
+            <input type="text" name="type" id="type" required>
+            <label for="interestPaymentDate">Interest Payment Date</label>
+            <input type="date" name="interestPaymentDate" id="interestPaymentDate">
+            <label for="maturityDate">Maturity Date</label>
+            <input type="date" name="maturityDate" id="maturityDate">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" required></textarea>
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" required>
+            <label for="link">Link</label>
+            <input type="text" name="link" id="link">
+            <label for="costs">Costs</label>
+            <input type="number" step="any" name="costs" id="costs">
+            <!-- Add button -->
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+<!-- Existing assets table -->
+<h2>Existing Assets</h2>
+<table>
+    <thead>
+        <tr>
+            <th class="name-col">Name</th>
+            <th class="longname-col">Long Name</th> <!-- Changed "Name" to "Long Name" -->
+            <th class="type-col">Type</th>
+            <th class="interest-payment-date-col">Interest Payment Date</th>
+            <th class="maturity-date-col">Maturity Date</th>
+            <th class="description-col">Description</th>
+            <th class="location-col">Location</th>
+            <th class="link-col">Link</th>
+            <th class="costs-col">Costs</th>
+            <th class="actions-col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Iterate through all assets and display their details in the table -->
+        {% for asset in assets %}
+        <tr>
+            <td class="name-col">{{ asset.name }}</td>
+            <td class="longname-col">{{ asset.long_name }}</td>
+            <td class="type-col">{{ asset.type }}</td>
+            <td class="interest-payment-date-col">{{ asset.interest_payment_date.strftime('%Y-%m-%d') if asset.interest_payment_date is not none else 'N/A' }}</td>
+            <td class="maturity-date-col">{{ asset.maturity_date.strftime('%Y-%m-%d') if asset.maturity_date else 'N/A' }}</td>
+            <td class="description-col">{{ asset.description }}</td>
+            <td class="location-col">{{ asset.location }}</td>
+            <td class="link-col">
+                <a href="{{ asset.link }}" target="_blank">{{ asset.link }}</a>
+            </td>
+            <td class="costs-col">{{ asset.costs }}</td>
+            <!-- Edit and Delete buttons for each asset -->
+            <td class="actions-col">
+                <a href="{{ url_for('views.edit_asset', asset_id=asset.id) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ url_for('views.delete_asset', asset_id=asset.id) }}" class="btn btn-danger" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete this asset?')) document.getElementById('delete-form-{{ asset.id }}').submit();">Delete</a>
+                <form id="delete-form-{{ asset.id }}" action="{{ url_for('views.delete_asset', asset_id=asset.id) }}" method="post" style="display: none;">
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
+            </td>            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+{% endblock %}

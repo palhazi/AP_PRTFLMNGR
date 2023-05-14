@@ -22,10 +22,13 @@
         <h2>Edit Investment</h2>
         <!-- Edit investment form -->
         <form action="{{ url_for('views.edit_investment', investment_id=investment.id) }}" method="post">
-            <label for="assetName">Asset Name</label>
-            <input type="text" name="assetName" id="assetName" value="{{ investment.asset_name }}" required>
-            <label for="assetType">Asset Type</label>
-            <input type="text" name="assetType" id="assetType" value="{{ investment.asset_type }}" required>
+            <!-- Asset selection dropdown -->
+            <label for="asset">Asset</label>
+            <select name="asset" id="asset" required> 
+                {% for asset in assets %} 
+                    <option value="{{ asset.id }}" {% if asset.id == investment.asset_id %}selected{% endif %}>{{ asset.name }}</option> 
+                {% endfor %} 
+            </select> 
             <label for="purchaseDate">Purchase Date</label>
             <input type="date" name="purchaseDate" id="purchaseDate" value="{{ investment.purchase_date.date() }}" required>
             <label for="purchasePrice">Purchase Price</label>
@@ -36,10 +39,6 @@
             <input type="number" step="any" name="currentPrice" id="currentPrice" value="{{ investment.current_price }}" required>
             <label for="expectedInterestAmount">Expected Interest Amount</label>
             <input type="number" step="any" name="expectedInterestAmount" id="expectedInterestAmount" value="{{ investment.expected_interest_amount }}" required>
-            <label for="interestPaymentDate">Interest Payment Date</label>
-            <input type="date" name="interestPaymentDate" id="interestPaymentDate" value="{{ investment.interest_payment_date.date() }}" required>
-            <label for="maturityDate">Maturity Date</label>
-            <input type="date" name="maturityDate" id="maturityDate" value="{{ investment.maturity_date.date() }}" required>
             <!-- User selection dropdown -->
             <label for="user">User</label>
             <select name="user" id="user" required> 

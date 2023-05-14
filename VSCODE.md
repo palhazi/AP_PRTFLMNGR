@@ -55,6 +55,7 @@ A "védett ág" olyan ág, amelyre vonatkozóan további korlátozások vannak b
 *A GitHubon a két ág összehasonlításához kövesse az alábbi lépéseket:*
 
 1. Menjen a projekt GitHub oldalára.
+   
 2. Kattintson az ágak lenyíló menüjére (általában a "master" vagy "main" ágat mutatja alapértelmezetten).
 
 3. A lenyíló menüben kiválasztja azt az ágat, amelyet össze szeretne hasonlítani egy másikkal.
