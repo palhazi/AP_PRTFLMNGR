@@ -13,5 +13,6 @@ Feladatok:
 
 Asset menü létrehozása - investmentből redundanciák kivétele
 
-
+Teendők a következő telepítésnél: pip install --upgrade werkzeug
+Hashelés elavult, ezért kell!
 
