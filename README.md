@@ -87,12 +87,3 @@ Az alkalmazás belépési pontja a website/__init__.py fájlban található.
 
 A Controller réteg az alkalmazás belépési pontja. Az `__init__.py` fájlban található. Ez a fájl tartalmazza az alkalmazás konfigurációját és inicializálja az alkalmazást. Az alkalmazás inicializálása során beállítja az adatbázis kapcsolatot, a nézeteket és az autentikációs rendszert.
 
-*Verzió kezelő*
-
-A Visual Studio Code (VS Code) egy nagyon népszerű közvetlenül integrálva van a Git verziókövető rendszerrel. Ezen keresztül könnyen lehet használni a Git funkciókat, mint például a commit, push és a szinkronizálás. Az említett parancsok a következőket jelentik:
-
-1. **Commit**: A Git rendszerben a commit parancs lényegében egy "pillanatkép" készítése a kódbázisról. Ez azt jelenti, hogy elmenti a fájlok jelenlegi állapotát, és lehetővé teszi, hogy a későbbiekben visszatérhess a commit által rögzített állapotra. A commit parancs használatakor általában meg kell adni egy üzenetet is, amely leírja, hogy mi változott a commit által.
-
-2. **Commit and Push**: Ez a parancs két műveletet hajt végre egyszerre. Először elmenti a változásokat egy új commitban (ahogy azt az előbb leírtam), majd a push parancs segítségével elküldi ezeket a változásokat a távoli repozitóriumba (általában egy GitHub vagy GitLab szerveren van). Ezáltal a többi fejlesztő is láthatja és letöltheti a változásokat.
-
-3. **Commit and Sync**: Ez a parancs hasonló a "Commit and Push"-hoz, de egy extra lépéssel kiegészülve. A "Commit and Sync" parancs használatakor a VS Code először elmenti a változásokat egy commitban, majd szinkronizálja a helyi repozitóriumot a távoli repozitóriummal. Ez azt jelenti, hogy nem csak elküldi a saját változásokat a távoli repozitóriumhoz (push), hanem le is tölti a távoli repozitóriumban történt összes új változást (pull). Ez a parancs hasznos lehet, ha egyszerre szeretnénk frissíteni a saját kódunkat és letölteni a többi fejlesztő által végzett módosításokat.
