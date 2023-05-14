@@ -3,8 +3,11 @@
 A Visual Studio Code (VS Code) beépített támogatást nyújt fájlok összehasonlítására a "Diff Editor" segítségével. A Diff Editor lehetővé teszi, hogy két fájl különbségeit egymás mellett jelenítse meg, és megmutassa a hozzáadott, eltávolított vagy módosított sorokat. A fájlok összehasonlításához a VS Code-ban kövesd az alábbi lépéseket:
 
 1. Nyisd meg a két fájlt, amelyet össze szeretnél hasonlítani a VS Code-ban.
+   
 2. Kattints a "File Explorer" (Fájlkezelő) ikonra a VS Code bal oldali oldalsávján.
+   
 3. Tartsd lenyomva a `Ctrl` (Windows/Linux) vagy a `Cmd` (macOS) billentyűt, és válaszd ki a két fájlt a fájlkezelőben.
+   
 4. Jobb egérgombbal kattints a kijelölt fájlokra, és válaszd az "Compare Selected" (Kijelöltek összehasonlítása) lehetőséget a helyi menüből.
 
 A Diff Editor megnyílik, és megjeleníti a két fájl közötti különbségeket.
@@ -13,6 +16,7 @@ Emellett a VS Code beépített Git támogatása is lehetővé teszi a változtat
 
 Ha további funkciókat szeretnél a fájlok összehasonlításához, számos bővítmény érhető el a VS Code piacterén, például a "Compare Folders" vagy a "Partial Diff", amelyek további összehasonlítási lehetőségeket kínálnak.
 
+*************************************************************************************************************
 
 *Verzió kezelő*
 
@@ -26,7 +30,9 @@ A Visual Studio Code (VS Code) egy nagyon népszerű közvetlenül integrálva v
 
 **1 Fájl commitolása**
 
-Az egyes fájlok külön-külön commitolásához a Visual Studio Code-ban a következő lépéseket követheted:
+*************************************************************************************************************
+
+*Az egyes fájlok külön-külön commitolásához a Visual Studio Code-ban a következő lépéseket követheted:*
 
 1. Nyisd meg a Source Control nézetet. A bal oldali oldalsávon kattints a Git ikonra (három ágazatot ábrázoló ikon).
 
@@ -44,6 +50,8 @@ Ha csak ezt az egy fájlt adtad hozzá a "staging area"-hoz, akkor csak ennek a 
 
 A pusholáshoz kattints a bal oldali oldalsávon lévő felhő ikonra vagy használd a "Git: Push" parancsot a Command Palette-ben (`Ctrl+Shift+P` vagy `Cmd+Shift+P` Mac-en). Ez a parancs feltölti a legutóbbi commitokat a távoli repozitóriumba.
 
+*************************************************************************************************************
+
 *Mergelés Githubon!*
 
 Általában a "master" ág a fő fejlesztési ág, amely a projekt stabil verzióját tartalmazza. A "dev" vagy "development" ág általában egy olyan ág, ahol a fejlesztés folyik, és amikor a fejlesztés befejeződött és stabil, a változásokat összevonják a "master" ágba.
@@ -51,6 +59,8 @@ A pusholáshoz kattints a bal oldali oldalsávon lévő felhő ikonra vagy haszn
 A "Pull Request" a GitHub sajátossága, és lehetővé teszi a fejlesztők számára, hogy bejelentsék, hogy szeretnék összevonni munkájukat egy másik ágba. Ezáltal a csapat többi tagja áttekintheti a módosításokat, hozzászólhat, tesztelhet és elfogadhatja (vagy elutasíthatja) az összevonást.
 
 A "védett ág" olyan ág, amelyre vonatkozóan további korlátozások vannak beállítva. Például megakadályozhatja a véletlen törlést, a nem ellenőrzött commitokat vagy a változások közvetlen pusholását. Ez általában a "master" ág, mivel ez a projekt stabil verzióját tartalmazza, és a véletlen hibákat minimálisra szeretnénk csökkenteni.
+
+*************************************************************************************************************
 
 *A GitHubon a két ág összehasonlításához kövesse az alábbi lépéseket:*
 
@@ -68,6 +78,7 @@ A "védett ág" olyan ág, amelyre vonatkozóan további korlátozások vannak b
 
 Ez az összehasonlítás lehetővé teszi, hogy lássa a két ág közötti különbségeket, és szükség esetén "Pull Request"-et hozzon létre az összevonásra. Ez különösen hasznos, ha több fejlesztő dolgozik a projekten, és össze szeretnék vonni munkájukat.
 
+*************************************************************************************************************
 
 *GIT GRAPH*
 
@@ -84,3 +95,15 @@ A Git-ben az ágakat arra használják, hogy elszigetelt környezetben dolgozzun
 A "master" és a "dev" ágak a helyi gépen lévő ágak, míg az "origin/master" és az "origin/dev" a távoli (GitHub-on lévő) repository ágai. Az "origin/" előtag azt jelenti, hogy ezek az ágak a távoli repositoryban léteznek. 
 
 A Git segítségével szinkronizálhatja a helyi és távoli ágakat, például a `git pull` parancs segítségével letöltheti a legfrissebb változásokat a távoli ágakról, vagy a `git push` parancs segítségével feltöltheti a helyi változásokat a távoli repositoryba.
+
+*************************************************************************************************************
+
+***GIT - Public/Private***
+
+- "The code will be visible to everyone who can visit https://github.com": Ez azt jelenti, hogy a repository nyilvános, így bárki, aki eléri a GitHubot, megtekintheti a kódját. Nem kell GitHub-felhasználónak lennie ahhoz, hogy megtekinthesse a repositoryt, mivel az interneten keresztül szabadon hozzáférhető.
+
+- "Anyone can fork your repository": A "forkolás" a GitHubon egy olyan folyamat, amelyben egy másik felhasználó létrehoz egy saját másolatot (vagy "forkot") a repositoryról a saját GitHub fiókjában. Ez lehetővé teszi számukra, hogy szabadon módosítsák a kódjukat anélkül, hogy befolyásolnák az eredeti repositoryt. Mivel a repository nyilvános, bárki forkolhatja azt.
+
+- "Your changes will be published as activity": Ez azt jelenti, hogy a repositoryban végzett változások, mint például a commitok és a pull requestek, nyilvánosak lesznek, és megjelennek a GitHub aktivitási feedjében. Más szavakkal, ha valaki a GitHub profilodra néz, láthatja, hogy milyen változásokat hajtottál végre a repositoryban.
+
+*************************************************************************************************************
