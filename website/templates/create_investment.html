@@ -76,10 +76,12 @@
         <!-- Add investment form -->
         <form action="{{ url_for('views.create_investment') }}" method="post">
             <!-- Input fields for investment details -->
-            <label for="assetName">Asset Name</label>
-            <input type="text" name="assetName" id="assetName" required>
-            <label for="assetType">Asset Type</label>
-            <input type="text" name="assetType" id="assetType" required>
+            <label for="asset">Asset</label>
+            <select name="asset" id="asset" required>
+                {% for asset in assets %}
+                <option value="{{ asset.id }}">{{ asset.name }}</option>
+                {% endfor %}
+            </select>            
             <label for="purchaseDate">Purchase Date</label>
             <input type="date" name="purchaseDate" id="purchaseDate" required>
             <label for="purchasePrice">Purchase Price</label>
@@ -90,10 +92,6 @@
             <input type="number" step="any" name="currentPrice" id="currentPrice" required>
             <label for="expectedInterestAmount">Expected Interest Amount</label>
             <input type="number" step="any" name="expectedInterestAmount" id="expectedInterestAmount" required>
-            <label for="interestPaymentDate">Interest Payment Date</label>
-            <input type="date" name="interestPaymentDate" id="interestPaymentDate" required>
-            <label for="maturityDate">Maturity Date</label>
-            <input type="date" name="maturityDate" id="maturityDate" required>
             <!-- Input fields for investment details -->
             <label for="user">User</label>
             <select name="user" id="user" required>
@@ -117,32 +115,29 @@
                     <th class="quantity-col">Quantity</th>
                     <th class="current-price-col">Current Price</th>
                     <th class="expected-interest-col">Expected Interest Amount</th>
-                    <th class="interest-payment-date-col">Interest Payment Date</th>
-                    <th class="maturity-date-col">Maturity Date</th>
                     <th class="actions-col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Iterate through all investments and display their details in the table -->
                 {% for investment in user_investments %}
-                    <tr>
-                        <td class="user-col">{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
-                        <td class="asset-name-col">{{ investment.asset_name }}</td>
-                        <td class="asset-type-col">{{ investment.asset_type }}</td>
-                        <td class="purchase-date-col">{{ investment.purchase_date.strftime('%Y-%m-%d') }}</td>
-                        <td class="purchase-price-col">{{ investment.purchase_price }}</td>
-                        <td class="quantity-col">{{ investment.quantity }}</td>
-                        <td class="current-price-col">{{ investment.current_price }}</td>
-                        <td class="expected-interest-col">{{ investment.expected_interest_amount }}</td>
-                        <td class="interest-payment-date-col">{{ investment.interest_payment_date.strftime('%Y-%m-%d') }}</td>
-                        <td class="maturity-date-col">{{ investment.maturity_date.strftime('%Y-%m-%d') }}</td>
-                        <!-- Edit and Delete buttons for each investment -->
-                        <td class="action-col">
-                            <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}" class="btn btn-primary">Edit</a>
-                            <a href="{{ url_for('views.delete_investment', investment_id=investment.id) }}" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                {% endfor %}
+    <tr>
+        <td class="user-col">{{ investment.user.first_name }} {{ investment.user.second_name }}</td>
+        <td class="asset-name-col">{{ investment.asset.name }}</td>
+        <td class="asset-type-col">{{ investment.asset.type }}</td>
+        <td class="purchase-date-col">{{ investment.purchase_date.strftime('%Y-%m-%d') }}</td>
+        <td class="purchase-price-col">{{ investment.purchase_price }}</td>
+        <td class="quantity-col">{{ investment.quantity }}</td>
+        <td class="current-price-col">{{ investment.current_price }}</td>
+        <td class="expected-interest-col">{{ investment.expected_interest_amount }}</td>
+        <!-- Edit and Delete buttons for each investment -->
+        <td class="action-col">
+            <a href="{{ url_for('views.edit_investment', investment_id=investment.id) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ url_for('views.delete_investment', investment_id=investment.id) }}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+{% endfor %}
+
             </tbody>
         </table>
     </div>

@@ -35,6 +35,8 @@ Ez elősegíti a kód olvashatóságát és karbantarthatóságát.
 hogy egyszerűsítsd az alkalmazás telepítését és skálázását. Ezzel megkönnyíted a fejlesztőknek és az üzemeltetőknek 
 az alkalmazás használatát és karbantartását.
 
+*************************************************************************************************************
+
 Az **AP_PRTFLMNGR mappa** tartalmazza a következőket:
 
 Icon: fájl
@@ -70,6 +72,8 @@ A `./__pycache__` mappa tartalmazza a `yfinance.cpython-39.pyc` fájlt.
 
 Az `./instance/database.db` fájl az adatbázis fájlja.
 
+*************************************************************************************************************
+
 Az alkalmazás forráskódja a *Model-View-Controller (MVC)* tervezési mintát követi. Az auth.py fájl tartalmazza az autentikációs rendszert, amely a Model réteghez tartozik. Az models.py fájl tartalmazza az adatbázis modelljeit, amelyek szintén a Model réteghez tartoznak. A views.py fájl tartalmazza a nézeteket, amelyek megjelenítik az adatokat a felhasználó számára. A templates mappa tartalmazza az HTML sablonokat, amelyeket a nézetek használnak.
 
 Melyik fájl - melyik réteghez tartozik az MVC pattern-ben:
@@ -87,3 +91,4 @@ Az alkalmazás belépési pontja a website/__init__.py fájlban található.
 
 A Controller réteg az alkalmazás belépési pontja. Az `__init__.py` fájlban található. Ez a fájl tartalmazza az alkalmazás konfigurációját és inicializálja az alkalmazást. Az alkalmazás inicializálása során beállítja az adatbázis kapcsolatot, a nézeteket és az autentikációs rendszert.
 
+*************************************************************************************************************

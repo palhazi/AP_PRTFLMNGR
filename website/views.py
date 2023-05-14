@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, abort
 from flask_login import login_required, current_user
-from .models import Note, User, Investment, InvestmentSnapshot
+from .models import Note, User, Investment, InvestmentSnapshot, Asset
 from . import db
 import json
 from datetime import datetime
 from functools import wraps
+from sqlalchemy.exc import IntegrityError
 import yfinance as yf
 
 # Létrehozzuk a views Blueprint-et.
@@ -73,8 +74,13 @@ def edit_user(user_id):
 def delete_user(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
-    db.session.commit()
-    flash('User deleted!', category='success')
+    try:
+        db.session.commit()
+        flash('User deleted!', category='success')
+    except IntegrityError:
+        db.session.rollback()
+        flash('Integrity error!', category='error')
+
     return redirect(url_for('views.all_users'))
 
 
@@ -84,30 +90,28 @@ def delete_user(user_id):
 def create_investment():
     users = User.query.all()
     user_investments = Investment.query.all()
+    assets = Asset.query.all()
     if request.method == 'POST':
         
         user_id = request.form.get('user')
+        asset_id = request.form.get('asset')
+        asset = Asset.query.get(asset_id)
 
-        asset_name = request.form.get('assetName')
-        asset_type = request.form.get('assetType')
         purchase_date = request.form.get('purchaseDate')
         purchase_date = datetime.strptime(purchase_date, "%Y-%m-%d")
         purchase_price = request.form.get('purchasePrice')
         quantity = request.form.get('quantity')
         current_price = request.form.get('currentPrice')
         expected_interest_amount = request.form.get('expectedInterestAmount')
-        interest_payment_date = request.form.get('interestPaymentDate')
-        interest_payment_date = datetime.strptime(interest_payment_date, "%Y-%m-%d")
-        maturity_date = request.form.get('maturityDate')
-        maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
 
-        new_investment = Investment(asset_name=asset_name, asset_type=asset_type, purchase_date=purchase_date, purchase_price=purchase_price, quantity=quantity, current_price=current_price, expected_interest_amount=expected_interest_amount, interest_payment_date=interest_payment_date, maturity_date=maturity_date, user_id=user_id)
+        new_investment = Investment(asset_id=asset.id, asset_name=asset.name, asset_type=asset.type, purchase_date=purchase_date, purchase_price=purchase_price, quantity=quantity, current_price=current_price, expected_interest_amount=expected_interest_amount, user_id=user_id)
+        
         db.session.add(new_investment)
         db.session.commit()
         flash('Investment created!', category='success')
         return redirect(url_for('views.create_investment'))
     
-    return render_template("create_investment.html", user_investments=user_investments, user=current_user, users=users)
+    return render_template("create_investment.html", user_investments=user_investments, user=current_user, users=users, assets=assets)
 
 
 
@@ -116,29 +120,21 @@ def create_investment():
 @login_required
 def edit_investment(investment_id):
     investment = Investment.query.get_or_404(investment_id)
-    users = User.query.all()  
+    users = User.query.all()
+    assets = Asset.query.all()
     if request.method == 'POST':
     
-        investment.asset_name = request.form.get('assetName')
-        investment.asset_type = request.form.get('assetType')
+        investment.asset_id = request.form.get('asset')
         
         purchase_date = request.form.get('purchaseDate')  
         purchase_date = datetime.strptime(purchase_date, "%Y-%m-%d")
         investment.purchase_date = purchase_date  
         
-        investment.purchase_price = request.form.get('purchasePrice')
-        investment.quantity = request.form.get('quantity')
-        investment.current_price = request.form.get('currentPrice')
-        investment.expected_interest_amount = request.form.get('expectedInterestAmount')
+        investment.purchase_price = float(request.form.get('purchasePrice'))
+        investment.quantity = float(request.form.get('quantity'))
+        investment.current_price = float(request.form.get('currentPrice'))
+        investment.expected_interest_amount = float(request.form.get('expectedInterestAmount'))
         
-        interest_payment_date = request.form.get('interestPaymentDate')  
-        interest_payment_date = datetime.strptime(interest_payment_date, "%Y-%m-%d")
-        investment.interest_payment_date = interest_payment_date  
-        
-        maturity_date = request.form.get('maturityDate')  
-        maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
-        investment.maturity_date = maturity_date
-
         user_id = request.form.get('user') 
         investment.user_id = user_id  
 
@@ -146,8 +142,8 @@ def edit_investment(investment_id):
         flash('Investment updated!', category='success')
         return redirect(url_for('views.create_investment'))
 
-    return render_template('edit_investment.html', investment=investment, user=current_user, users=users)  # Módosítva
-
+    # Itt adjuk át az assets változót a sablonnak
+    return render_template('edit_investment.html', investment=investment, user=current_user, users=users, assets=assets)  
 
 
 # Definiáljuk a befektetés törlésének útvonalát.
@@ -211,8 +207,6 @@ def create_snapshots():
                 quantity=investment.quantity,
                 current_price=investment.current_price,
                 expected_interest_amount=investment.expected_interest_amount,
-                interest_payment_date=investment.interest_payment_date,
-                maturity_date=investment.maturity_date,
                 snapshot_group_id=new_snapshot_group_id  # Folytonos sorszám hozzáadása
             )
             db.session.add(snapshot)
@@ -261,3 +255,102 @@ def stock():
 
     return render_template('stock_form.html', user=current_user)
 
+# Definiáljuk az útvonalat az eszközök létrehozásához és megjelenítéséhez.
+
+@views.route('/create-asset', methods=['GET', 'POST'])
+@login_required
+def create_asset():
+    assets = Asset.query.all()
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        long_name = request.form.get('long_name')
+        type = request.form.get('type')
+        
+        interest_payment_date = request.form.get('interestPaymentDate')
+        if interest_payment_date:
+         interest_payment_date = datetime.strptime(interest_payment_date, "%Y-%m-%d")
+        else:
+         interest_payment_date = None  
+
+        maturity_date = request.form.get('maturityDate')
+        if maturity_date:
+         maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
+        else:
+         maturity_date = None  
+
+        description = request.form.get('description')
+        location = request.form.get('location')
+        link = request.form.get('link')
+        
+        costs = request.form.get('costs')
+        if costs:
+         costs = float(costs)
+        else:
+         costs = None 
+
+        new_asset = Asset(name=name,long_name=long_name,type=type, interest_payment_date=interest_payment_date, maturity_date=maturity_date, description=description, location=location, link=link, costs=costs)
+        db.session.add(new_asset)
+        db.session.commit()
+        flash('Asset created!', category='success')
+        return redirect(url_for('views.create_asset'))
+    
+    return render_template("create_asset.html", user=current_user, assets=assets)
+
+# Definiáljuk az útvonalat az eszközök szerkesztéséhez.
+
+@views.route('/edit-asset/<int:asset_id>', methods=['GET', 'POST'])
+@login_required
+def edit_asset(asset_id):
+    asset = Asset.query.get_or_404(asset_id)
+
+    if request.method == 'POST':
+        asset.name = request.form.get('name')
+        asset.long_name = request.form.get('long_name')
+        asset.type = request.form.get('type')
+
+        interest_payment_date = request.form.get('interestPaymentDate')
+        if interest_payment_date:
+            interest_payment_date = datetime.strptime(interest_payment_date, "%Y-%m-%d")
+        else:
+            interest_payment_date = None
+        asset.interest_payment_date = interest_payment_date
+
+        maturity_date = request.form.get('maturityDate')
+        if maturity_date:
+            maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
+        else:
+            maturity_date = None
+        asset.maturity_date = maturity_date
+
+        asset.description = request.form.get('description')
+        asset.location = request.form.get('location')
+        asset.link = request.form.get('link')
+
+        costs = request.form.get('costs')
+        if costs:
+            asset.costs = float(costs)
+        else:
+            asset.costs = None
+
+        db.session.commit()
+        flash('Asset updated!', category='success')
+        return redirect(url_for('views.create_asset'))
+
+    return render_template('edit_asset.html', asset=asset, user=current_user)
+
+# Definiáljuk az útvonalat az eszközök törléséhez.
+
+@views.route('/delete-asset/<int:asset_id>', methods=['GET', 'POST', 'DELETE'])
+@login_required
+def delete_asset(asset_id):
+    asset = Asset.query.get_or_404(asset_id)
+    db.session.delete(asset)
+    try:
+        db.session.commit()
+        flash('Asset deleted!', category='success')
+    except IntegrityError:
+        db.session.rollback()
+        flash('Integrity Error!', category='error')
+
+    return redirect(url_for('views.create_asset'))

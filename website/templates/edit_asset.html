@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 1350px;
+        margin: 0 auto;
+    }
+    label {
+        margin-top: 10px;
+    }
+    button {
+        margin-top: 20px;
+        width: 100px;
+        align-self: center;
+    }
+</style>
+<div class="container">
+    <h2>Edit Asset</h2>
+    <form action="{{ url_for('views.edit_asset', asset_id=asset.id) }}" method="post">
+        <label for="name">Asset Name</label>
+        <input type="text" name="name" id="name" value="{{ asset.name }}" required>
+        <label for="name">Long Name</label>
+        <input type="text" name="long_name" id="long_name" value="{{ asset.long_name }}" required>
+        <label for="type">Asset Type</label>
+        <input type="text" name="type" id="type" value="{{ asset.type }}" required>
+        <label for="interestPaymentDate">Interest Payment Date</label>
+        <input type="date" name="interestPaymentDate" id="interestPaymentDate" value="{{ asset.interest_payment_date.strftime('%Y-%m-%d') if asset.interest_payment_date else '' }}">
+        <label for="maturityDate">Maturity Date</label>
+        <input type="date" name="maturityDate" id="maturityDate" value="{{ asset.maturity_date.strftime('%Y-%m-%d') if asset.maturity_date else '' }}">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" required>{{ asset.description }}</textarea>
+        <label for="location">Location</label>
+        <input type="text" name="location" id="location" value="{{ asset.location }}" required>
+        <label for="link">Link</label>
+        <input type="text" name="link" id="link" value="{{ asset.link }}">
+        <label for="costs">Costs</label>
+        <input type="number" step="any" name="costs" id="costs" value="{{ asset.costs }}">
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}
+
