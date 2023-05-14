@@ -67,3 +67,20 @@ A "védett ág" olyan ág, amelyre vonatkozóan további korlátozások vannak b
 6. Ha beállította az ágakat, az oldal megmutatja az összehasonlítást: a zöld színű sorok azok, amelyek hozzá lettek adva, a piros színű sorok pedig azok, amelyek törölve lettek az adott ágban a "base" ághoz képest.
 
 Ez az összehasonlítás lehetővé teszi, hogy lássa a két ág közötti különbségeket, és szükség esetén "Pull Request"-et hozzon létre az összevonásra. Ez különösen hasznos, ha több fejlesztő dolgozik a projekten, és össze szeretnék vonni munkájukat.
+
+
+*GIT GRAPH*
+
+A Git-ben az ágakat arra használják, hogy elszigetelt környezetben dolgozzunk a kódon. A Git Graph bővítményben látható "dev", "master", "origin/dev", és "origin/master" ágak a következőket jelentik:
+
+1. **master**: Ez a fő ág, amely általában a stabil, kiadásra kész kódot tartalmazza. Sok projektben ez az alapértelmezett ág.
+
+2. **dev**: Ez egy fejlesztői ág, ahol a fejlesztők új funkciókat dolgoznak ki, javítanak, stb., mielőtt ezeket beolvasztanák a fő (master) ágba.
+
+3. **origin/master**: Ez a távoli repository ("origin") master ága. A "origin" az a név, amit a Git általában használ az eredeti távoli repository azonosítására, amelyből a projektet klónoztuk. Tehát az "origin/master" a távoli repository master ágát jelenti.
+
+4. **origin/dev**: Hasonlóan, az "origin/dev" a távoli repository dev ágát jelenti.
+
+A "master" és a "dev" ágak a helyi gépen lévő ágak, míg az "origin/master" és az "origin/dev" a távoli (GitHub-on lévő) repository ágai. Az "origin/" előtag azt jelenti, hogy ezek az ágak a távoli repositoryban léteznek. 
+
+A Git segítségével szinkronizálhatja a helyi és távoli ágakat, például a `git pull` parancs segítségével letöltheti a legfrissebb változásokat a távoli ágakról, vagy a `git push` parancs segítségével feltöltheti a helyi változásokat a távoli repositoryba.
