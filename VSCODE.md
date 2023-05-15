@@ -107,3 +107,28 @@ A Git segítségével szinkronizálhatja a helyi és távoli ágakat, például 
 - "Your changes will be published as activity": Ez azt jelenti, hogy a repositoryban végzett változások, mint például a commitok és a pull requestek, nyilvánosak lesznek, és megjelennek a GitHub aktivitási feedjében. Más szavakkal, ha valaki a GitHub profilodra néz, láthatja, hogy milyen változásokat hajtottál végre a repositoryban.
 
 *************************************************************************************************************
+
+__Markdown (.md)__ __speciális karakterek__
+
+**szöveg** vagy __szöveg__: Félkövér szöveg létrehozása.
+*szöveg* vagy _szöveg_: Dőlt szöveg létrehozása.
+~~szöveg~~: Áthúzott szöveg létrehozása.
+`szöveg`: Monospace (fix szélességű) szöveg létrehozása, gyakran kód bemutatására használják.
+# szöveg: Címsor létrehozása. A # számának növelésével csökkenthető a címsor szintje (pl. ##, ###, stb.).
+[link szöveg](url): Hiperlink létrehozása.
+- szöveg: Felsorolásjegyes lista létrehozása.
+1. szöveg: Számozott lista létrehozása.
+> szöveg: Idézet létrehozása.
+szöveg: Kódblokk létrehozása.
+![alt szöveg](url): Kép beillesztése.
+Ez csak a Markdown alapvető szintaxisának egy része. Sok más formázási lehetőség is van, és egyes platformok, például a GitHub, saját kiterjesztéseket is hozzáadnak a Markdownhoz.
+
+***: Vízszintes vonal húzása a dokumentumban. Az --- vagy a ___ is használható ugyanezen célból.
+* [ ] szöveg: Bejelöletlen feladatlista elem létrehozása.
+* [x] szöveg: Bejelölt feladatlista elem létrehozása.
+[szöveg][1], majd később a dokumentumban: [1]: url: Hivatkozások létrehozása.
+| oszlop 1 | oszlop 2 |: Táblázat létrehozása. Az oszlopokat a | karakter választja el, és új sorban megadható a |---|---| szintaxis a fejléc elkülönítésére.
+:emoji_kód:: Emoji beillesztése. A GitHub és más platformok támogatják az emojik használatát a Markdownban.
+```nyelv `kód` ```: Szintaxiskiemelés használata a kódblokkokban. Az 'nyelv' helyére írja be a kód nyelvét (pl. python, javascript, stb.).
+
+*************************************************************************************************************
