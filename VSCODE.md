@@ -132,3 +132,5 @@ Ez csak a Markdown alapvető szintaxisának egy része. Sok más formázási leh
 ```nyelv `kód` ```: Szintaxiskiemelés használata a kódblokkokban. Az 'nyelv' helyére írja be a kód nyelvét (pl. python, javascript, stb.).
 
 *************************************************************************************************************
+
+a
