@@ -15,7 +15,17 @@ Asset menü létrehozása - investmentből redundanciák kivétele
 
 Teendők a következő telepítésnél: pip install --upgrade werkzeug
 Hashelés elavult, ezért kell!
-<<<<<<< HEAD
-1
-=======
->>>>>>> dba15d5c3fd931d15128bf972ecf180b5897d256
+
+apprtflmngr.pythonanywhere.com
+
+g/?y&p+n6PA#ys5
+
+bash konzolban frissítés:
+
+státusz lekérdezése
+
+(myenv) 20:31 ~/AP_PRTFLMNGR (master)$ git status
+
+frissítés:
+
+git pull origin master
