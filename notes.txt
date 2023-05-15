@@ -9,13 +9,6 @@ command+shift+p --- VsCode kiválasztó
 
 sql-lite parancsok futtatása, mindig az oldalon lévő  Select(Shift+enter) kell nyomni, akkor jelenik meg az eredmény
 
-Feladatok:
-
-Asset menü létrehozása - investmentből redundanciák kivétele
-
-Teendők a következő telepítésnél: pip install --upgrade werkzeug
-Hashelés elavult, ezért kell!
-
 apprtflmngr.pythonanywhere.com
 
 g/?y&p+n6PA#ys5
