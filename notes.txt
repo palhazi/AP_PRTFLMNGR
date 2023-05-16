@@ -22,3 +22,9 @@ státusz lekérdezése
 frissítés:
 
 git pull origin master
+
+üzenet szerkesztő kilépés: :q! parancsot, majd nyomj entert
+
+Ha nem tudsz kilépni a git üzenet szerkesztőből, akkor valószínűleg a szerkesztőben vagy, 
+
+amelyet a git beállításokban állítottál be (gyakran az alapértelmezett szerkesztő a vi vagy a vim).
