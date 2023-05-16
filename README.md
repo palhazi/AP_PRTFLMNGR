@@ -92,3 +92,21 @@ Az alkalmazás belépési pontja a website/__init__.py fájlban található.
 A Controller réteg az alkalmazás belépési pontja. Az `__init__.py` fájlban található. Ez a fájl tartalmazza az alkalmazás konfigurációját és inicializálja az alkalmazást. Az alkalmazás inicializálása során beállítja az adatbázis kapcsolatot, a nézeteket és az autentikációs rendszert.
 
 *************************************************************************************************************
+
+**API token***
+
+mport requests
+username = 'apprtflmngr'
+token = '3fa4b672f8d80fc1d47e12896143396956b390d1'
+
+response = requests.get(
+    'https://www.pythonanywhere.com/api/v0/user/{username}/cpu/'.format(
+        username=username
+    ),
+    headers={'Authorization': 'Token {token}'.format(token=token)}
+)
+if response.status_code == 200:
+    print('CPU quota info:')
+    print(response.content)
+else:
+    print('Got unexpected status code {}: {!r}'.format(response.status_code, response.content))
