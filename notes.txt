@@ -9,13 +9,22 @@ command+shift+p --- VsCode kiválasztó
 
 sql-lite parancsok futtatása, mindig az oldalon lévő  Select(Shift+enter) kell nyomni, akkor jelenik meg az eredmény
 
-Feladatok:
+apprtflmngr.pythonanywhere.com
 
-Asset menü létrehozása - investmentből redundanciák kivétele
+g/?y&p+n6PA#ys5
 
-Teendők a következő telepítésnél: pip install --upgrade werkzeug
-Hashelés elavult, ezért kell!
-<<<<<<< HEAD
-1
-=======
->>>>>>> dba15d5c3fd931d15128bf972ecf180b5897d256
+bash konzolban frissítés:
+
+státusz lekérdezése
+
+(myenv) 20:31 ~/AP_PRTFLMNGR (master)$ git status
+
+frissítés:
+
+git pull origin master
+
+üzenet szerkesztő kilépés: :q! parancsot, majd nyomj entert
+
+Ha nem tudsz kilépni a git üzenet szerkesztőből, akkor valószínűleg a szerkesztőben vagy, 
+
+amelyet a git beállításokban állítottál be (gyakran az alapértelmezett szerkesztő a vi vagy a vim).
