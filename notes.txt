@@ -21,7 +21,8 @@ státusz lekérdezése
 
 frissítés:
 
-git pull origin master
+git pull origin master  --- evvel kell befrissíteni, 
+commit csak akkor kell ha változást akarunk visszavinni a branche-be
 
 üzenet szerkesztő kilépés: :q! parancsot, majd nyomj entert
 
