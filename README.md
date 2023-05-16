@@ -57,7 +57,12 @@ views.py: fájl
 
 templates: mappa
 
-A website mappa tartalmazza az alkalmazás forráskódját. Az __init__.py fájl az alkalmazás belépési pontja. Az auth.py fájl tartalmazza az autentikációs rendszert. Az models.py fájl tartalmazza az adatbázis modelljeit. Az views.py fájl tartalmazza a nézeteket, amelyek megjelenítik az adatokat a felhasználó számára. A templates mappa tartalmazza az HTML sablonokat, amelyeket a nézetek használnak.
+A website mappa tartalmazza az alkalmazás forráskódját. 
+Az __init__.py fájl az alkalmazás belépési pontja. 
+Az auth.py fájl tartalmazza az autentikációs rendszert. 
+A models.py fájl tartalmazza az adatbázis modelljeit. 
+A views.py fájl tartalmazza a nézeteket, amelyek megjelenítik az adatokat a felhasználó számára. 
+A templates mappa tartalmazza az HTML sablonokat, amelyeket a nézetek használnak.
 
 Az `AP_PRTFLMNGR` mappa tartalmazza a következő fájlokat:
 
@@ -74,7 +79,11 @@ Az `./instance/database.db` fájl az adatbázis fájlja.
 
 *************************************************************************************************************
 
-Az alkalmazás forráskódja a *Model-View-Controller (MVC)* tervezési mintát követi. Az auth.py fájl tartalmazza az autentikációs rendszert, amely a Model réteghez tartozik. Az models.py fájl tartalmazza az adatbázis modelljeit, amelyek szintén a Model réteghez tartoznak. A views.py fájl tartalmazza a nézeteket, amelyek megjelenítik az adatokat a felhasználó számára. A templates mappa tartalmazza az HTML sablonokat, amelyeket a nézetek használnak.
+Az alkalmazás forráskódja a *Model-View-Controller (MVC)* tervezési mintát követi. 
+Az auth.py fájl tartalmazza az autentikációs rendszert, amely a Model réteghez tartozik. 
+Az models.py fájl tartalmazza az adatbázis modelljeit, amelyek szintén a Model réteghez tartoznak. 
+A views.py fájl tartalmazza a nézeteket, amelyek megjelenítik az adatokat a felhasználó számára. 
+A templates mappa tartalmazza az HTML sablonokat, amelyeket a nézetek használnak.
 
 Melyik fájl - melyik réteghez tartozik az MVC pattern-ben:
 
@@ -89,7 +98,38 @@ templates: HTML sablonok, amelyeket a nézetek használnak
 *Controller réteg:*
 Az alkalmazás belépési pontja a website/__init__.py fájlban található.
 
-A Controller réteg az alkalmazás belépési pontja. Az `__init__.py` fájlban található. Ez a fájl tartalmazza az alkalmazás konfigurációját és inicializálja az alkalmazást. Az alkalmazás inicializálása során beállítja az adatbázis kapcsolatot, a nézeteket és az autentikációs rendszert.
+A Controller réteg az alkalmazás belépési pontja. Az `__init__.py` fájlban található. 
+Ez a fájl tartalmazza az alkalmazás konfigurációját és inicializálja az alkalmazást. 
+Az alkalmazás inicializálása során beállítja az adatbázis kapcsolatot, a nézeteket és az autentikációs rendszert.
+
+*************************************************************************************************************
+
+**WSGI Server**
+
+A WSGI (Web Server Gateway Interface) egy interfész-specifikáció, amely lehetővé teszi a Python webalkalmazások futtatását webkiszolgáló szervereken. 
+A WSGI szerverek olyan szoftverek, amelyek képesek kezelni a bejövő HTTP kéréseket, és továbbítják azokat a Python webalkalmazásoknak, amelyek a WSGI interfészt használják. 
+A WSGI szerverek segítenek biztosítani a Python alkalmazások gyors és hatékony működését a valós üzemeltetés során.
+
+Amikor az üzenet azt mondja, hogy "használj egy produkciós WSGI szerveret helyette", azt jelenti, hogy a fejlesztői szerver, 
+amelyet a Flask keretrendszer biztosít, nem alkalmas valós üzemeltetésre vagy nagy forgalom kezelésére. 
+Az ilyen alkalmazásokat általában egy produkciós környezetben futó WSGI szerverre, például Gunicorn vagy uWSGI, telepítik és futtatják, 
+amelyek optimalizáltak a nagy terhelésű webalkalmazások kezelésére.
+
+Amikor készen állsz egy Flask alkalmazásodat valós üzembe helyezni, fontos megfontolni egy produkciós WSGI szerver használatát,
+ amely megfelel a skálázhatósági, megbízhatósági és teljesítménykövetelményeidnek.
+
+
+**Minta a WSGIszerverre, Python anywhere serverev van:**
+
+import sys
+
+# add your project directory to the sys.path
+project_home = '/home/apprtflmngr/AP_PRTFLMNGR'
+if project_home not in sys.path:
+    sys.path = [project_home] + sys.path
+
+# import flask app but need to call it "application" for WSGI to work
+from main import app as application  # noqa
 
 *************************************************************************************************************
 

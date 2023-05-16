@@ -1,6 +1,8 @@
 **Fájlok összehasonlítása VSCODE-ban**
 
-A Visual Studio Code (VS Code) beépített támogatást nyújt fájlok összehasonlítására a "Diff Editor" segítségével. A Diff Editor lehetővé teszi, hogy két fájl különbségeit egymás mellett jelenítse meg, és megmutassa a hozzáadott, eltávolított vagy módosított sorokat. A fájlok összehasonlításához a VS Code-ban kövesd az alábbi lépéseket:
+A Visual Studio Code (VS Code) beépített támogatást nyújt fájlok összehasonlítására a "Diff Editor" segítségével. A Diff Editor lehetővé teszi, 
+hogy két fájl különbségeit egymás mellett jelenítse meg, és megmutassa a hozzáadott, eltávolított vagy módosított sorokat. 
+A fájlok összehasonlításához a VS Code-ban kövesd az alábbi lépéseket:
 
 1. Nyisd meg a két fájlt, amelyet össze szeretnél hasonlítani a VS Code-ban.
    
@@ -12,7 +14,8 @@ A Visual Studio Code (VS Code) beépített támogatást nyújt fájlok összehas
 
 A Diff Editor megnyílik, és megjeleníti a két fájl közötti különbségeket.
 
-Emellett a VS Code beépített Git támogatása is lehetővé teszi a változtatások összehasonlítását a verziókezelőben. Ha a munkaterület egy Git repository, akkor a "Source Control" (Forráskódkezelő) panelen belül megtekintheted a módosításokat és összehasonlíthatod a jelenlegi állapotot a korábbi commitokkal.
+Emellett a VS Code beépített Git támogatása is lehetővé teszi a változtatások összehasonlítását a verziókezelőben. 
+Ha a munkaterület egy Git repository, akkor a "Source Control" (Forráskódkezelő) panelen belül megtekintheted a módosításokat és összehasonlíthatod a jelenlegi állapotot a korábbi commitokkal.
 
 Ha további funkciókat szeretnél a fájlok összehasonlításához, számos bővítmény érhető el a VS Code piacterén, például a "Compare Folders" vagy a "Partial Diff", amelyek további összehasonlítási lehetőségeket kínálnak.
 
@@ -20,13 +23,22 @@ Ha további funkciókat szeretnél a fájlok összehasonlításához, számos b�
 
 *Verzió kezelő*
 
-A Visual Studio Code (VS Code) egy nagyon népszerű közvetlenül integrálva van a Git verziókövető rendszerrel. Ezen keresztül könnyen lehet használni a Git funkciókat, mint például a commit, push és a szinkronizálás. Az említett parancsok a következőket jelentik:
+A Visual Studio Code (VS Code) egy nagyon népszerű közvetlenül integrálva van a Git verziókövető rendszerrel. 
+Ezen keresztül könnyen lehet használni a Git funkciókat, mint például a commit, push és a szinkronizálás. 
+Az említett parancsok a következőket jelentik:
 
-1. **Commit**: A Git rendszerben a commit parancs lényegében egy "pillanatkép" készítése a kódbázisról. Ez azt jelenti, hogy elmenti a fájlok jelenlegi állapotát, és lehetővé teszi, hogy a későbbiekben visszatérhess a commit által rögzített állapotra. A commit parancs használatakor általában meg kell adni egy üzenetet is, amely leírja, hogy mi változott a commit által.
+1. **Commit**: A Git rendszerben a commit parancs lényegében egy "pillanatkép" készítése a kódbázisról. 
+Ez azt jelenti, hogy elmenti a fájlok jelenlegi állapotát, és lehetővé teszi, hogy a későbbiekben visszatérhess a commit által rögzített állapotra. 
+A commit parancs használatakor általában meg kell adni egy üzenetet is, amely leírja, hogy mi változott a commit által.
 
-2. **Commit and Push**: Ez a parancs két műveletet hajt végre egyszerre. Először elmenti a változásokat egy új commitban (ahogy azt az előbb leírtam), majd a push parancs segítségével elküldi ezeket a változásokat a távoli repozitóriumba (általában egy GitHub vagy GitLab szerveren van). Ezáltal a többi fejlesztő is láthatja és letöltheti a változásokat.
+2. **Commit and Push**: Ez a parancs két műveletet hajt végre egyszerre. Először elmenti a változásokat egy új commitban (ahogy azt az előbb leírtam), 
+majd a push parancs segítségével elküldi ezeket a változásokat a távoli repozitóriumba (általában egy GitHub vagy GitLab szerveren van). 
+Ezáltal a többi fejlesztő is láthatja és letöltheti a változásokat.
 
-3. **Commit and Sync**: Ez a parancs hasonló a "Commit and Push"-hoz, de egy extra lépéssel kiegészülve. A "Commit and Sync" parancs használatakor a VS Code először elmenti a változásokat egy commitban, majd szinkronizálja a helyi repozitóriumot a távoli repozitóriummal. Ez azt jelenti, hogy nem csak elküldi a saját változásokat a távoli repozitóriumhoz (push), hanem le is tölti a távoli repozitóriumban történt összes új változást (pull). Ez a parancs hasznos lehet, ha egyszerre szeretnénk frissíteni a saját kódunkat és letölteni a többi fejlesztő által végzett módosításokat.
+3. **Commit and Sync**: Ez a parancs hasonló a "Commit and Push"-hoz, de egy extra lépéssel kiegészülve. 
+A "Commit and Sync" parancs használatakor a VS Code először elmenti a változásokat egy commitban, majd szinkronizálja a helyi repozitóriumot a távoli repozitóriummal. 
+Ez azt jelenti, hogy nem csak elküldi a saját változásokat a távoli repozitóriumhoz (push), hanem le is tölti a távoli repozitóriumban történt összes új változást (pull).
+ Ez a parancs hasznos lehet, ha egyszerre szeretnénk frissíteni a saját kódunkat és letölteni a többi fejlesztő által végzett módosításokat.
 
 **1 Fájl commitolása**
 
@@ -40,7 +52,8 @@ A Visual Studio Code (VS Code) egy nagyon népszerű közvetlenül integrálva v
 
 3. Egyesével commitolhatod a fájlokat a következőképpen:
    - Keresd meg azt a fájlt, amit commitolni szeretnél.
-   - Kattints a fájl nevének jobb oldalán található "+" ikonra. Ezzel a művelettel a fájl hozzáadásra kerül a "staging area"-hoz -- módosítások előjegyzésre kerülnek, amit Git szóhasználattal "stage"-elésnek hívunk. Ez azt jelenti, hogy a fájl készen áll a commitolásra.
+   - Kattints a fájl nevének jobb oldalán található "+" ikonra. Ezzel a művelettel a fájl hozzáadásra kerül a "staging area"-hoz -- módosítások előjegyzésre kerülnek, amit Git szóhasználattal "stage"-elésnek hívunk. 
+   Ez azt jelenti, hogy a fájl készen áll a commitolásra.
    
 4. Írd be a commit üzenetet a felső mezőbe.
 
