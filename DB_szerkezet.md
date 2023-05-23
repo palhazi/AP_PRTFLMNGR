@@ -109,3 +109,27 @@ current_price (FLOAT)
 expected_interest_amount (FLOAT)
 user_id (INTEGER)
 asset_id (INTEGER)
+
+Az adatbázis szerkezet a következő kapcsolatokkal rendelkezik:
+
+*A "user" tábla kapcsolódik a következő táblákhoz:*
+
+"Accounts" tábla: A "user" tábla "id" oszlopa a "Accounts" tábla "UserID" oszlopával van kapcsolatban.
+
+"MainAccounts" tábla: A "user" tábla "id" oszlopa a "MainAccounts" tábla "UserID" oszlopával van kapcsolatban.
+
+"Properties" tábla: A "user" tábla "id" oszlopa a "Properties" tábla "UserID" oszlopával van kapcsolatban.
+
+"Coins" tábla: A "user" tábla "id" oszlopa a "Coins" tábla "UserID" oszlopával van kapcsolatban.
+
+"ETFs" tábla: A "user" tábla "id" oszlopa a "ETFs" tábla "UserID" oszlopával van kapcsolatban.
+
+"Portfolio" tábla: A "user" tábla "id" oszlopa a "Portfolio" tábla "UserID" oszlopával van kapcsolatban.
+
+"note" tábla: A "user" tábla "id" oszlopa a "note" tábla "user_id" oszlopával van kapcsolatban.
+
+"investment" tábla: A "user" tábla "id" oszlopa a "investment" tábla "user_id" oszlopával van kapcsolatban.
+
+*A "asset" tábla kapcsolódik a következő táblákhoz:*
+
+"investment" tábla: Az "asset" tábla "id" oszlopa a "investment" tábla "asset_id" oszlopával van kapcsolatban.
