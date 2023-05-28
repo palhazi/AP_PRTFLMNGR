@@ -12,12 +12,8 @@
 AccountID (Primary Key, INT)
 UserID (Foreign Key references user.id, INT)
 AccountType (VARCHAR) --  új oszlop a fiók típusának meghatározására (pl. "Regular" vagy "Main")
-InstrumentType (VARCHAR)
-Maturity (DATE)
-NominalValue (DECIMAL)
-InterestConditions (VARCHAR)
-DueInterest (DECIMAL)
-DueInterestDate (DATE)
+AccountNumber
+Maturity date
 
 
 *asset*
